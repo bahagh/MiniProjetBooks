@@ -19,7 +19,7 @@ namespace WebApplication2.Controllers
                     return BadRequest("Titles cannot be empty.");
                 }
 
-                var path = @"C:\\Users\\Asus\\Downloads\\New folder\\Books\\{0}.txt";
+                var path = @".\\Books\\{0}.txt";
                 var pathWithTitles = string.Format(path, model.Titles);
 
                 using (FileStream fs = new FileStream(pathWithTitles, FileMode.Create))
@@ -55,7 +55,7 @@ namespace WebApplication2.Controllers
 
         private List<string> GetBooksTitles()
         {
-            var path = @"C:\\Users\\Asus\\Downloads\\New folder\\Books";
+            var path = @".\\Books";
 
             string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
             List<string> _books = new List<string>();
@@ -84,7 +84,7 @@ namespace WebApplication2.Controllers
         }
         private string[] ReadWordsFromFile(int id)
         {
-            var path = @"C:\\Users\\Asus\\Downloads\\New folder\\Books";
+            var path = @".\\Books";
             string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
             var filePath = books[id];
 
