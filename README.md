@@ -1,1 +1,1 @@
-IEA Test
+IEA Mini Project Test
