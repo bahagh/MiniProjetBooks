@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
+using WebApplication2.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace WebApplication2.Controllers
 {
@@ -38,11 +42,7 @@ namespace WebApplication2.Controllers
             }
         }
 
-        public class BookCreationModel
-        {
-            public string Content { get; set; }
-            public string Titles { get; set; }
-        }
+        
 
 
         [HttpGet("GetTitles", Name = "GetTitles")]
@@ -132,7 +132,7 @@ namespace WebApplication2.Controllers
             return topTenWords;
         }
 
-        //
+        
         [HttpGet("IsMatchingWord/{id}/{word}", Name = "IsMatchingWord")]
         public bool IsMatchingWord(int id, string word)
         {
