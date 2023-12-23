@@ -22,10 +22,9 @@ namespace WebApplication2.Controllers
                 {
                     return BadRequest("Titles cannot be empty.");
                 }
-
-                var path = @".\\Books\\{0}.txt";
-                var pathWithTitles = string.Format(path, model.Titles);
-
+                int index = GetNextIndex();
+                var path = @".\\Books\\{0} - {1}.txt";
+                var pathWithTitles = string.Format(path, index, model.Titles);
                 using (FileStream fs = new FileStream(pathWithTitles, FileMode.Create))
                 {
                     byte[] contentBytes = System.Text.Encoding.UTF8.GetBytes(model.Content);
@@ -36,13 +35,20 @@ namespace WebApplication2.Controllers
             }
             catch (Exception ex)
             {
-                
                 Console.WriteLine($"Error creating book: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error");
             }
+        }        
+        private int GetNextIndex()
+        {
+            int currentIndex = 3; 
+                                 
+            currentIndex++;
+            return currentIndex;
         }
 
-        
+
+
 
 
         [HttpGet("GetTitles", Name = "GetTitles")]
@@ -55,7 +61,7 @@ namespace WebApplication2.Controllers
 
         private List<string> GetBooksTitles()
         {
-            var path = @".\\Books";
+            var path = @".\Books"; 
 
             string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
             List<string> _books = new List<string>();
@@ -63,7 +69,9 @@ namespace WebApplication2.Controllers
             foreach (var book in books)
             {
 
-                _books.Add(book.Replace(path, string.Empty));
+                var title = book.Replace(path, string.Empty).TrimStart('\\').TrimEnd(".txt".ToCharArray());
+
+                _books.Add(title);
             }
 
             return _books;
@@ -85,8 +93,21 @@ namespace WebApplication2.Controllers
         private string[] ReadWordsFromFile(int id)
         {
             var path = @".\\Books";
-            string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
-            var filePath = books[id];
+            string[] books = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
+
+            // Find the file with a name containing the specified ID
+            var matchingFile = books.FirstOrDefault(file =>
+            {
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                return fileNameWithoutExtension.StartsWith(id.ToString() + " - ");
+            });
+
+            if (matchingFile == null)
+            {
+                throw new FileNotFoundException($"File with ID {id} not found.");
+            }
+
+            var filePath = matchingFile;
 
             string content;
             using (FileStream fs = new FileStream(filePath, FileMode.Open))
@@ -94,13 +115,13 @@ namespace WebApplication2.Controllers
                 byte[] contentBytes = new byte[fs.Length];
                 fs.Read(contentBytes, 0, contentBytes.Length);
                 content = System.Text.Encoding.UTF8.GetString(contentBytes);
-
             }
 
             var words = content.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', ';', ':', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
             return words;
         }
+
         private List<string> GetOcurrentWords(string[] words)
         {
             var wordCount = new Dictionary<string, int>();
