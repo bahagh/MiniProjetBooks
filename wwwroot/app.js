@@ -20,24 +20,43 @@ async function createBook() {
         alert('Error creating book');
     }
 }
+/////////////////////
+document.getElementById('getTitlesBtn').addEventListener('click', function () {
+    
+    fetch('/Books/GetTitles')
+        .then(response => response.json())
+        .then(data => {
+            
+            var titlesContainer = document.getElementById('titlesContainer');
+            titlesContainer.innerHTML = ''; 
 
-async function getTitles() {
-    const response = await fetch('/Books/GetTitles');
-    const titles = await response.json();
+            data.forEach(function (title) {
+                var titleButton = document.createElement('button');
+                titleButton.textContent = title;
+                titleButton.addEventListener('click', function () {
+                    // When a title button is clicked, trigger the GetTopTenWords function
+                    getTopTenWords(title);
+                });
+                titlesContainer.appendChild(titleButton);
+            });
+        });
+});
 
-    const titlesList = document.getElementById('titlesList');
-    titlesList.innerHTML = titles.map(title => `<li>${title}</li>`).join('');
+// Function to trigger the GetTopTenWords function
+function getTopTenWords(title) {
+    const id = parseInt(title.split('-')[0].trim());
+
+    fetch(`/Books/GetTopTenWords/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // Display the list of words and their occurrences in an alert
+            alert('Top Ten Words for "' + title + ':"\n' +
+                data.map(wordInfo => `${wordInfo.key} - ${wordInfo.value}`).join('\n'));
+        });
 }
 
-async function getTopTenWords() {
-    const bookId = document.getElementById('bookId').value;
-    const response = await fetch(`/Books/GetTopTenWords/${bookId}`);
-    const topWords = await response.json();
 
-    const topWordsList = document.getElementById('topWordsList');
-    topWordsList.innerHTML = topWords.map(word => `<li>${word}</li>`).join('');
-}
-
+//////////////////////////
 async function checkMatchingWord() {
     const bookId = document.getElementById('checkWordId').value;
     const wordToCheck = document.getElementById('wordToCheck').value;
@@ -53,11 +72,22 @@ async function checkMatchingWord() {
 
 async function findSubstring() {
     const bookId = document.getElementById('substringId').value;
-    const substring = document.getElementById('substring').value;
+    const substringInput = document.getElementById('substring');
+    const substring = substringInput.value;
+
+    
+    if (substring.length < 3) {
+        alert('Please enter a substring with at least 3 characters.');
+        return;
+    }
 
     const response = await fetch(`/Books/FindSubstring/${bookId}/${substring}`);
-    const words = await response.json();
+    const wordOccurrences = await response.json();
 
     const substringList = document.getElementById('substringList');
-    substringList.innerHTML = words.map(word => `<li>${word}</li>`).join('');
+    substringList.innerHTML = wordOccurrences.map(wordOccurrence => {
+        const { key, value } = wordOccurrence;
+        return `<li>${key} - Occurrences: ${value}</li>`;
+    }).join('');
 }
+

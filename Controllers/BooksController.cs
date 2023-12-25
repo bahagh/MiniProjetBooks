@@ -38,12 +38,13 @@ namespace WebApplication2.Controllers
                 Console.WriteLine($"Error creating book: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error");
             }
-        }        
+        }
         private int GetNextIndex()
         {
-            int currentIndex = 3; 
-                                 
-            currentIndex++;
+            var dir = @".\\Books\\";
+            int currentIndex = Directory.GetFiles(dir, "*.txt").Length + 1;
+
+            
             return currentIndex;
         }
 
@@ -51,7 +52,7 @@ namespace WebApplication2.Controllers
 
 
 
-        [HttpGet("GetTitles", Name = "GetTitles")]
+        [HttpGet("GetTitles", Name = "books")]
         public List<string> GetTitles()
         {
             var books = GetBooksTitles();
@@ -61,7 +62,7 @@ namespace WebApplication2.Controllers
 
         private List<string> GetBooksTitles()
         {
-            var path = @".\Books"; 
+            var path = @".\Books";
 
             string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
             List<string> _books = new List<string>();
@@ -79,11 +80,12 @@ namespace WebApplication2.Controllers
 
 
         [HttpGet("GetTopTenWords/{id}", Name = "GetTopTenWords")]
-        public List<string> GetTopTenWords(int id)
+        public List<KeyValuePair<string, int>> GetTopTenWords(int id)
         {
             return GetTopWords(id);
         }
-        private List<string> GetTopWords(int id)
+
+        private List<KeyValuePair<string, int>> GetTopWords(int id)
         {
             var words = ReadWordsFromFile(id);
             var topTenWords = GetOcurrentWords(words);
@@ -117,12 +119,12 @@ namespace WebApplication2.Controllers
                 content = System.Text.Encoding.UTF8.GetString(contentBytes);
             }
 
-            var words = content.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', ';', ':', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+            var words = content.Split(new char[] { ' ', '\t', '\n', '\r' , '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '.', '/', '<', '>', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
             return words;
         }
 
-        private List<string> GetOcurrentWords(string[] words)
+        private List<KeyValuePair<string, int>> GetOcurrentWords(string[] words)
         {
             var wordCount = new Dictionary<string, int>();
 
@@ -144,46 +146,70 @@ namespace WebApplication2.Controllers
 
             var _words = wordCount.OrderByDescending(w => w.Value).Take(10);
 
-            var topTenWords = new List<string>();
+            var topTenWords = new List<KeyValuePair<string, int>>();
             foreach (var word in _words)
             {
-                topTenWords.Add(word.Key);
+                topTenWords.Add(new KeyValuePair<string, int>(word.Key, word.Value));
             }
 
             return topTenWords;
         }
 
-        
+
         [HttpGet("IsMatchingWord/{id}/{word}", Name = "IsMatchingWord")]
         public bool IsMatchingWord(int id, string word)
         {
             var topTenWords = GetTopWords(id);
-            foreach (var _word in topTenWords)
-            {
-                if (_word.ToLower() == word.ToLower())
-                {
-                    return true;
-                }
-            }
 
-            return false;
+            // Check if the provided word is in the list of top ten words
+            return topTenWords.Any(wordInfo => wordInfo.Key.ToLower() == word.ToLower());
         }
+
+
+
+
 
         [HttpGet("FindSubstring/{id}/{subWord}", Name = "FindSubstring")]
-        public List<string> FindSubtringInWords(int id, string subWord)
+        public List<KeyValuePair<string, int>> FindSubstringInWords(int id, string subWord)
         {
-            var _words = new List<string>();
+            
+            if (subWord.Length < 3)
+            {
+                
+                throw new ArgumentException("The subword must have a minimum length of 3 characters.", nameof(subWord));
+            }
 
             var words = ReadWordsFromFile(id);
+            var matchingWords = new Dictionary<string, int>();
+
             foreach (var word in words)
             {
-                if (word.Contains(subWord))
+                if (word.ToLower().StartsWith(subWord.ToLower()))
                 {
-                    _words.Add(word);
+                    string cleanedWord = word.ToLower();
+                    if (matchingWords.ContainsKey(cleanedWord))
+                    {
+                        matchingWords[cleanedWord]++;
+                    }
+                    else
+                    {
+                        matchingWords[cleanedWord] = 1;
+                    }
                 }
             }
-            return _words;
+
+            var result = matchingWords.OrderByDescending(w => w.Value)
+                                .Select(w => new KeyValuePair<string, int>(w.Key, w.Value))
+                                .ToList();
+
+            return result;
         }
+
+
+
+
+
+
 
     }
 }
