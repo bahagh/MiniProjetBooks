@@ -7,6 +7,7 @@ body {
 }
 
 div {
+
     background-color: #fff;
     padding: 20px;
     margin-bottom: 20px;
@@ -17,6 +18,11 @@ div {
 h2 {
     color: #333;
 }
+
+#titlesContainer {
+    display: flex;
+    flex-direction: row;
+} 
 
 label {
     display: block;

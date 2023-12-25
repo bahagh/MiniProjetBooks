@@ -9,10 +9,9 @@ using System.Linq;
 namespace WebApplication2.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
-
         [HttpPost(Name = "Create")]
         public ActionResult Create([FromBody] BookCreationModel model)
         {
@@ -52,7 +51,7 @@ namespace WebApplication2.Controllers
 
 
 
-        [HttpGet("GetTitles", Name = "books")]
+        [HttpGet("", Name = "books")]
         public List<string> GetTitles()
         {
             var books = GetBooksTitles();
@@ -79,7 +78,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        [HttpGet("GetTopTenWords/{id}", Name = "GetTopTenWords")]
+        [HttpGet("{id}", Name = "GetTopTenWords")]
         public List<KeyValuePair<string, int>> GetTopTenWords(int id)
         {
             return GetTopWords(id);
@@ -97,7 +96,7 @@ namespace WebApplication2.Controllers
             var path = @".\\Books";
             string[] books = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
 
-            // Find the file with a name containing the specified ID
+            
             var matchingFile = books.FirstOrDefault(file =>
             {
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
@@ -156,7 +155,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        [HttpGet("IsMatchingWord/{id}/{word}", Name = "IsMatchingWord")]
+        [HttpGet("{id}/{word}", Name = "IsMatchingWord")]
         public bool IsMatchingWord(int id, string word)
         {
             var topTenWords = GetTopWords(id);
@@ -165,14 +164,9 @@ namespace WebApplication2.Controllers
             return topTenWords.Any(wordInfo => wordInfo.Key.ToLower() == word.ToLower());
         }
 
-
-
-
-
-        [HttpGet("FindSubstring/{id}/{subWord}", Name = "FindSubstring")]
+        [HttpGet("{id}/search/{subWord}", Name = "FindSubstring")]
         public List<KeyValuePair<string, int>> FindSubstringInWords(int id, string subWord)
-        {
-            
+        {            
             if (subWord.Length < 3)
             {
                 
@@ -204,11 +198,6 @@ namespace WebApplication2.Controllers
 
             return result;
         }
-
-
-
-
-
 
 
     }

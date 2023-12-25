@@ -20,7 +20,36 @@
         <h2>Get Titles</h2>
         <button id="getTitlesBtn">Get Titles</button>
         <div id="titlesContainer"></div>
-        
+        <script>
+            document.getElementById('getTitlesBtn').addEventListener('click', function () {
+                fetch('/Books/GetTitles')
+                    .then(response => response.json())
+                    .then(data => {
+                        var titlesContainer = document.getElementById('titlesContainer');
+                        titlesContainer.innerHTML = '';
+
+                        data.forEach(function (title) {
+                            var titleButton = document.createElement('button');
+                            titleButton.textContent = title;
+                            titleButton.addEventListener('click', function () {
+                                getTopTenWords(title);
+                            });
+                            titlesContainer.appendChild(titleButton);
+                        });
+                    });
+            });
+
+            function getTopTenWords(title) {
+                const id = parseInt(title.split('-')[0].trim());
+
+                fetch(`/Books/GetTopTenWords/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('Top Ten Words for "' + title + ':"\n' +
+                            data.map(wordInfo => `${wordInfo.key} - ${wordInfo.value}`).join('\n'));
+                    });
+            }
+        </script>
 
 
 
