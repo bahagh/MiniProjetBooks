@@ -1,1 +1,0 @@
-this is me writing a book about how i'm getting used to c# via this test mini project
