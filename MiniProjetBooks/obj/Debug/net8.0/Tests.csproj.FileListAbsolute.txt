@@ -1,0 +1,6 @@
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\bin\Debug\net8.0\CoverletSourceRootsMapping_Tests
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\obj\Debug\net8.0\Tests.csproj.AssemblyReference.cache
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\obj\Debug\net8.0\Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\obj\Debug\net8.0\Tests.AssemblyInfoInputs.cache
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\obj\Debug\net8.0\Tests.AssemblyInfo.cs
+C:\Users\Asus\Documents\projet.net\project321\MiniProjetBooks\obj\Debug\net8.0\Tests.csproj.CoreCompileInputs.cache
