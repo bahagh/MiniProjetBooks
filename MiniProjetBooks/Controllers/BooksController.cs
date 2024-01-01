@@ -21,9 +21,17 @@ namespace WebApplication2.Controllers
                 {
                     return BadRequest("Titles cannot be empty.");
                 }
+
+                // Check if a book with the same title already exists
+                if (BookWithTitleExists(model.Titles))
+                {
+                    return BadRequest($"A book with the title '{model.Titles}' already exists.");
+                }
+
                 int index = GetNextIndex();
-                var path = @".\\Books\\{0} - {1}.txt";
+                var path = @".\Books\{0} - {1}.txt";
                 var pathWithTitles = string.Format(path, index, model.Titles);
+
                 using (FileStream fs = new FileStream(pathWithTitles, FileMode.Create))
                 {
                     byte[] contentBytes = System.Text.Encoding.UTF8.GetBytes(model.Content);
@@ -38,14 +46,33 @@ namespace WebApplication2.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error");
             }
         }
+
+        private bool BookWithTitleExists(string title)
+        {
+            var dir = @".\Books\";
+            var existingFiles = Directory.GetFiles(dir, "*.txt");
+
+            foreach (var filePath in existingFiles)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(filePath);
+                var existingTitle = fileName.Split('-').Last().Trim();
+                if (existingTitle.Equals(title, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private int GetNextIndex()
         {
-            var dir = @".\\Books\\";
+            var dir = @".\Books\";
             int currentIndex = Directory.GetFiles(dir, "*.txt").Length + 1;
 
-            
             return currentIndex;
         }
+
 
 
 
@@ -166,14 +193,22 @@ namespace WebApplication2.Controllers
 
         [HttpGet("{id}/search/{subWord}", Name = "FindSubstring")]
         public List<KeyValuePair<string, int>> FindSubstringInWords(int id, string subWord)
-        {            
+        {
             if (subWord.Length < 3)
             {
-                
                 throw new ArgumentException("The subword must have a minimum length of 3 characters.", nameof(subWord));
             }
 
-            var words = ReadWordsFromFile(id);
+            string[] words;
+            try
+            {
+                words = ReadWordsFromFile(id);
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+
             var matchingWords = new Dictionary<string, int>();
 
             foreach (var word in words)

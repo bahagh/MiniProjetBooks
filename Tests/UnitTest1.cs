@@ -17,7 +17,7 @@ namespace WebApplication2.Tests
         {
             // Arrange
             var controller = new BooksController();
-            var model = new BookCreationModel { Titles = "Sample Title", Content = "Sample Content" };
+            var model = new BookCreationModel { Titles = "NEWTITLETEST25", Content = "testING Content testING Content testING Content testING Content testING Content" }; // !!!!!!!!!!!!!!!!!!!!!!!!
 
             // Act
             var result = controller.Create(model);
@@ -104,6 +104,80 @@ namespace WebApplication2.Tests
             Assert.IsType<List<KeyValuePair<string, int>>>(result);
         }
 
-        
+
+        [Fact]
+        public void IsMatchingWord_InvalidWord_ReturnsFalse()
+        {
+            // Arrange
+            var controller = new BooksController();
+            var id = 2701;
+            var invalidWord = "sdfsdfsd";
+
+            // Act
+            var result = controller.IsMatchingWord(id, invalidWord);
+
+            // Assert
+            Assert.False(result);
+        }
+        [Fact]
+        public void FindSubstringInWords_SubWordTooShort_ThrowsArgumentException()
+        {
+            // Arrange
+            var controller = new BooksController();
+            var id = 98;
+            var subWord = "ab";
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => controller.FindSubstringInWords(id, subWord));
+        }
+        [Fact]
+        public void FindSubstringInWords_NonExistingId()
+        {
+            // Arrange
+            var controllerbahafssiw = new BooksController(); 
+            int nonExistingId = 7007; 
+
+            // Act & Assert 
+            
+            Assert.Throws<ArgumentException>(() =>
+            {
+                controllerbahafssiw.FindSubstringInWords(nonExistingId, "was");
+            });
+        }
+        [Fact]
+        public void Create_DuplicateTitle_ReturnsBadRequest()
+        {
+            // Arrange
+            var controller = new BooksController(); 
+            var existingTitle = "hello2"; 
+            var model = new BookCreationModel
+            {
+                Titles = existingTitle,
+                Content = "Some content"
+            };
+            var xx = "A book with the title '" + existingTitle + "' already exists.";
+            // Act
+            var result = controller.Create(model);
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);           
+            Assert.Equal(xx, badRequestResult.Value);
+        }
+
+
+        [Fact]
+        public void GetTopTenWords_InvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            var controller = new BooksController();
+            var invalidId = -1 ;
+
+          
+            // Assert
+            Assert.Throws<FileNotFoundException>(() => controller.GetTopTenWords(invalidId));
+
+        }
+
+
+
     }
 }

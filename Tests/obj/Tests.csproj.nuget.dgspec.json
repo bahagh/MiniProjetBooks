@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\Documents\\projet.net\\project321\\Tests\\Tests.csproj": {}
+    "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\WebApplication2.csproj": {
+    "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\WebApplication2.csproj",
+        "projectPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -100,14 +100,14 @@
         }
       }
     },
-    "C:\\Users\\Asus\\Documents\\projet.net\\project321\\Tests\\Tests.csproj": {
+    "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\Tests\\Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\Tests\\Tests.csproj",
+        "projectPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\Tests\\Tests.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\Tests\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -124,8 +124,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\WebApplication2.csproj": {
-                "projectPath": "C:\\Users\\Asus\\Documents\\projet.net\\project321\\MiniProjetBooks\\WebApplication2.csproj"
+              "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {
+                "projectPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj"
               }
             }
           }
