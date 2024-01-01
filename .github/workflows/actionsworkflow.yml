@@ -21,17 +21,16 @@ jobs:
         dotnet-version: 8.x  
 
     - name: Restore Dependencies
-      run: |
-        cd MiniProjetBooks  
-        dotnet restore
-
+      run: dotnet restore
+      working-directory: MiniProjetBooks/MiniProjetBooks
     - name: Build
-      run: |
-        cd MiniProjetBooks  
-        dotnet build --configuration Release
+      run: dotnet build --configuration Release
+      working-directory: MiniProjetBooks/MiniProjetBooks
 
     - name: Test
-      run: |
+      run: dotnet test --configuration Release --no-build
+      working-directory: MiniProjetBooks/MiniProjetBooks
+
         cd MiniProjetBooks  # Change to the project directory
         dotnet test --configuration Release --no-build
 
