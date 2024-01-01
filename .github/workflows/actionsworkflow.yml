@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
-        path: ./MiniProjetBooks/WebApplication2.sln
+        path: MiniProjetBooks
   
 
     - name: Setup .NET Core
