@@ -31,6 +31,4 @@ jobs:
       run: dotnet test --configuration Release --no-build
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-        cd MiniProjetBooks  # Change to the project directory
-        dotnet test --configuration Release --no-build
 
