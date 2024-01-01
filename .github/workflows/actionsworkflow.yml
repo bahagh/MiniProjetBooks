@@ -14,21 +14,24 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: MiniProjetBooks
-  
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 8.x
-        
-    - name: accessing dir
-      run: cd MiniProjetBooks   
-      
+        dotnet-version: 8.x  
+
     - name: Restore Dependencies
-      run: dotnet restore
+      run: |
+        cd MiniProjetBooks  
+        dotnet restore
 
     - name: Build
-      run: dotnet build --configuration Release
+      run: |
+        cd MiniProjetBooks  
+        dotnet build --configuration Release
 
     - name: Test
-      run: dotnet test --configuration Release --no-build
+      run: |
+        cd MiniProjetBooks  # Change to the project directory
+        dotnet test --configuration Release --no-build
+
