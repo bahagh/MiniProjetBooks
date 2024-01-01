@@ -9,7 +9,10 @@ To run the application locally please follow this steps.
 ## Info
 
 - this project was developed with .net 8.0
-## 1/ Fast Run Using Bash Commands:
+
+You can choose to from VSStudio or using shell :
+## 1/ Fast Run Using shell:
+open cmd or powershell and :
 ### Create a new folder to host this project and getting into it 
 ```bash
  mkdir Baha_assignment
