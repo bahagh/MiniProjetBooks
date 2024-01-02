@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+vhT14p6Y9rA6LQ3fB6hGD1cQDYSijnQ2zajLh9+z2M=",
+  "Hash": "N5LYwzkgiYjlIsj5so2f8eE8Jyj9Juh/LFywC69h44E=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "WebApplication2\\wwwroot",
       "Source": "WebApplication2",
-      "ContentRoot": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\app.js",
+      "Identity": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\app.js",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "app.js",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\app.js"
     },
     {
-      "Identity": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\index.html",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\styles.css",
+      "Identity": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\styles.css",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "styles.css",
       "AssetKind": "All",

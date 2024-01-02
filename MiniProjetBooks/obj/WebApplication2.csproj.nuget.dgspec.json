@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {}
+    "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {
+    "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
+        "projectPath": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\WebApplication2.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\Desktop\\test99999\\MiniProjetBooks\\MiniProjetBooks\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\Desktop\\kolyoum\\MiniProjetBooks\\MiniProjetBooks\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
