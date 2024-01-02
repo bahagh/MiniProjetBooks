@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
 using System;
@@ -29,7 +29,7 @@ namespace WebApplication2.Controllers
                 }
 
                 int index = GetNextIndex();
-                var path = @"Books\{0} - {1}.txt";
+                var path = @".\Books\{0} - {1}.txt";
                 var pathWithTitles = string.Format(path, index, model.Titles);
 
                 using (FileStream fs = new FileStream(pathWithTitles, FileMode.Create))
@@ -49,7 +49,7 @@ namespace WebApplication2.Controllers
 
         private bool BookWithTitleExists(string title)
         {
-            var dir = @"Books\";
+            var dir = @".\Books\";
             var existingFiles = Directory.GetFiles(dir, "*.txt");
 
             foreach (var filePath in existingFiles)
@@ -67,7 +67,7 @@ namespace WebApplication2.Controllers
 
         private int GetNextIndex()
         {
-            var dir = @"Books\";
+            var dir = @".\Books\";
             int currentIndex = Directory.GetFiles(dir, "*.txt").Length + 1;
 
             return currentIndex;
@@ -88,7 +88,7 @@ namespace WebApplication2.Controllers
 
         private List<string> GetBooksTitles()
         {
-            var path = @"Books";
+            var path = @".\Books";
 
             string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
             List<string> _books = new List<string>();
@@ -120,7 +120,7 @@ namespace WebApplication2.Controllers
         }
         private string[] ReadWordsFromFile(int id)
         {
-            var path = @"Books";
+            var path = @".\\Books";
             string[] books = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
 
             
