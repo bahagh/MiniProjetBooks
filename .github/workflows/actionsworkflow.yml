@@ -24,7 +24,7 @@ jobs:
       run: dotnet restore
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-    - name: Build
+    - name: Building
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
