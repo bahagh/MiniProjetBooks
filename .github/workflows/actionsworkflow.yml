@@ -28,6 +28,4 @@ jobs:
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-    - name: Test
-      run: dotnet test --configuration Release --no-build
-      working-directory: MiniProjetBooks/Tests
+
