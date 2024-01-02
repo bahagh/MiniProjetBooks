@@ -22,13 +22,14 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore
-      working-directory: MiniProjetBooks/MiniProjetBooks
+      working-directory: MiniProjetBooks
+
     - name: Build
       run: dotnet build --configuration Release
-      working-directory: MiniProjetBooks/MiniProjetBooks
+      working-directory: MiniProjetBooks
 
     - name: Test
       run: dotnet test --configuration Release --no-build
-      working-directory: MiniProjetBooks/MiniProjetBooks
+      working-directory: MiniProjetBooks.Tests
 
 
