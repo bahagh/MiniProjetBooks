@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
-        path: MiniProjetBooks
+        path: MiniProjetBooks/MiniProjetBooks
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -24,7 +24,7 @@ jobs:
       run: dotnet restore
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-    - name: Building
+    - name: Build
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
