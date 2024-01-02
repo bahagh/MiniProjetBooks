@@ -22,7 +22,7 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore
-      working-directory: MiniProjetBooks\MiniProjetBooks
+      
 
     - name: Build
       run: dotnet build --configuration Release
