@@ -24,15 +24,10 @@ jobs:
       run: dotnet restore
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-    - name: Build
+    - name: Building
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
     - name: Test
       run: dotnet test --configuration Release --no-build
       working-directory: MiniProjetBooks/Tests
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 1c9bd3a52374905b5f0c736cd616c46b69d96722
