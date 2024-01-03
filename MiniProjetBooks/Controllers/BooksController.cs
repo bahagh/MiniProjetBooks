@@ -12,6 +12,8 @@ namespace WebApplication2.Controllers
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
+        private readonly string booksDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Books");
+
         [HttpPost(Name = "Create")]
         public ActionResult Create([FromBody] BookCreationModel model)
         {
@@ -29,10 +31,9 @@ namespace WebApplication2.Controllers
                 }
 
                 int index = GetNextIndex();
-                var path = @".\Books\{0} - {1}.txt";
-                var pathWithTitles = string.Format(path, index, model.Titles);
+                var path = Path.Combine(booksDirectory, $"{index} - {model.Titles}.txt");
 
-                using (FileStream fs = new FileStream(pathWithTitles, FileMode.Create))
+                using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
                     byte[] contentBytes = System.Text.Encoding.UTF8.GetBytes(model.Content);
                     fs.Write(contentBytes, 0, contentBytes.Length);
@@ -49,8 +50,7 @@ namespace WebApplication2.Controllers
 
         private bool BookWithTitleExists(string title)
         {
-            var dir = @".\Books\";
-            var existingFiles = Directory.GetFiles(dir, "*.txt");
+            var existingFiles = Directory.GetFiles(booksDirectory, "*.txt");
 
             foreach (var filePath in existingFiles)
             {
@@ -67,43 +67,30 @@ namespace WebApplication2.Controllers
 
         private int GetNextIndex()
         {
-            var dir = @".\Books\";
-            int currentIndex = Directory.GetFiles(dir, "*.txt").Length + 1;
-
+            int currentIndex = Directory.GetFiles(booksDirectory, "*.txt").Length + 1;
             return currentIndex;
         }
-
-
-
-
-
 
         [HttpGet("", Name = "books")]
         public List<string> GetTitles()
         {
             var books = GetBooksTitles();
-
             return books;
         }
 
         private List<string> GetBooksTitles()
         {
-            var path = @".\Books";
-
-            string[] books = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
+            string[] books = Directory.GetFileSystemEntries(booksDirectory, "*", SearchOption.AllDirectories);
             List<string> _books = new List<string>();
 
             foreach (var book in books)
             {
-
-                var title = book.Replace(path, string.Empty).TrimStart('\\').TrimEnd(".txt".ToCharArray());
-
+                var title = book.Replace(booksDirectory, string.Empty).TrimStart('\\').TrimEnd(".txt".ToCharArray());
                 _books.Add(title);
             }
 
             return _books;
         }
-
 
         [HttpGet("{id}", Name = "GetTopTenWords")]
         public List<KeyValuePair<string, int>> GetTopTenWords(int id)
@@ -118,12 +105,11 @@ namespace WebApplication2.Controllers
 
             return topTenWords;
         }
+
         private string[] ReadWordsFromFile(int id)
         {
-            var path = @".\\Books";
-            string[] books = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories);
+            string[] books = Directory.GetFiles(booksDirectory, "*.txt", SearchOption.AllDirectories);
 
-            
             var matchingFile = books.FirstOrDefault(file =>
             {
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
@@ -145,7 +131,7 @@ namespace WebApplication2.Controllers
                 content = System.Text.Encoding.UTF8.GetString(contentBytes);
             }
 
-            var words = content.Split(new char[] { ' ', '\t', '\n', '\r' , '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '.', '/', '<', '>', '?' }, StringSplitOptions.RemoveEmptyEntries);
+            var words = content.Split(new char[] { ' ', '\t', '\n', '\r', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '.', '/', '<', '>', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
             return words;
         }
@@ -180,7 +166,6 @@ namespace WebApplication2.Controllers
 
             return topTenWords;
         }
-
 
         [HttpGet("{id}/{word}", Name = "IsMatchingWord")]
         public bool IsMatchingWord(int id, string word)
@@ -233,7 +218,5 @@ namespace WebApplication2.Controllers
 
             return result;
         }
-
-
     }
 }

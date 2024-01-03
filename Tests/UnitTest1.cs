@@ -17,7 +17,7 @@ namespace WebApplication2.Tests
         {
             // Arrange
             var controller = new BooksController();
-            var model = new BookCreationModel { Titles = "titlefortest007", Content = "testING Content testING Content testING Content testING Content testING Content" }; // !!!!!!!!!!!!!!!!!!!!!!!!
+            var model = new BookCreationModel { Titles = "Titlefortest007", Content = "testING Content testING Content testING Content testING Content testING Content" }; // !!!!!!!!!!!!!!!!!!!!!!!!
 
             // Act
             var result = controller.Create(model);
