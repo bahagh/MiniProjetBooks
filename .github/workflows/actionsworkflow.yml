@@ -1,4 +1,4 @@
-name: Build and Test
+name: CICD workflow with azure
 
 on:
   push:
@@ -28,6 +28,15 @@ jobs:
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
-    - name: Running Tests
+    - name: Tests
       run: dotnet test --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
+      
+    - name: Publish
+      run: dotnet publish -c Release -o '$(build.artifactStagingDirectory)'
+      
+    - name: Deploy to Azure
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.IEA_BOOKS_WEB_APP }}
+        publish-profile: ${{ secrets.IEABOOKS_PUBLISH_PROFILE }}
