@@ -33,7 +33,8 @@ jobs:
       working-directory: MiniProjetBooks/MiniProjetBooks
       
     - name: Publish
-      run: dotnet publish -c Release -o '$(build.artifactStagingDirectory)'
+      run: dotnet publish -c Release -o MiniProjetBooks/MiniProjetBooks
+      
       
     - name: Deploy to Azure
       uses: Azure/webapps-deploy@v2
