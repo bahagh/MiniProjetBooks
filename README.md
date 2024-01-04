@@ -47,4 +47,4 @@ running this command below will run the project on: http://localhost:5269/ , che
 ## 3/ Executing Tests:
 - Go to the solution explorer bar right-click on the Tests project under the solution (WebApplication2/Tests)
 - Click on Execute tests
-- Go to View > Tests Explorer to view their status or behaviour 
+- Go to View > Tests Explorer to view their status or behaviourr
