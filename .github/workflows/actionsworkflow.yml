@@ -19,100 +19,26 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 8.x  
-    
 
-    - name: Set up dependency caching for faster builds
-      uses: actions/cache@v2
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+    - name: Restore Dependencies
+      run: dotnet restore
+      working-directory: MiniProjetBooks/MiniProjetBooks
 
     - name: Building
       run: dotnet build --configuration Release
       working-directory: MiniProjetBooks/MiniProjetBooks
 
+    - name: Tests
+      run: dotnet test --configuration Release
+      working-directory: MiniProjetBooks/MiniProjetBooks
+      
     - name: Publish
       run: dotnet publish -c Release -o '$(build.artifactStagingDirectory)'
       working-directory: MiniProjetBooks/MiniProjetBooks
-
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
+      
+      
+    - name: Deploy to Azure
+      uses: Azure/webapps-deploy@v2
       with:
-        name: .net-app
-        path: MiniProjetBooks/MiniProjetBooks
-
-
-  deploy_dev:
-    name: dev
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}      
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
-          path: MiniProjetBooks
-          
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.IEA_BOOKS_WEB_APP }}
-          publish-profile: ${{ secrets.IEABOOKS_PUBLISH_PROFILE }}
-
-      
-  deploy_test:
-    name: test
-    runs-on: ubuntu-latest
-    needs: [build, deploy_dev]
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
-          path: MiniProjetBooks/MiniProjetBooks
-          
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.IEA_BOOKS_WEB_APP }}
-          publish-profile: ${{ secrets.IEABOOKS_PUBLISH_PROFILE }}
-
-
-
-  deploy_uat:
-    name: UAT
-    runs-on: ubuntu-latest
-    needs: [build, deploy_dev]
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
-          path: MiniProjetBooks/MiniProjetBooks
-          
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.IEA_BOOKS_WEB_APP }}
-          publish-profile: ${{ secrets.IEABOOKS_PUBLISH_PROFILE }}  
-   
-      
-
+        app-name: ${{ secrets.IEA_BOOKS_WEB_APP }}
+        publish-profile: ${{ secrets.IEABOOKS_PUBLISH_PROFILE }}
