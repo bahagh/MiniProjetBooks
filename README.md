@@ -48,3 +48,5 @@ running this command below will run the project on: http://localhost:5269/ , che
 - Go to the solution explorer bar right-click on the Tests project under the solution (WebApplication2/Tests)
 - Click on Execute tests
 - Go to View > Tests Explorer to view their status or behaviourr
+### CICD Pipeline
+This project is provided with a CICD pipeline that triggers automatically on pushes to the master branch automated by github actions from , buillding to testing to deployment on azure ("https://ieabooks.azurewebsites.net/" the front can be loaded but i'm still making the necessary changes to make the whole app work on the server )
