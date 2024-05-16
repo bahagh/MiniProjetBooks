@@ -1,6 +1,6 @@
 # ASP.NET Core Web App
 
-This basic ASP.NET Core Web App is test for a software web developer position in IEA
+This is an ASP.NET Core Web App for managing books
 
 ## Getting Started
 
